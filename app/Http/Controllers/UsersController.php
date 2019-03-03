@@ -40,7 +40,7 @@ class UsersController extends Controller {
 		//$user->remember_token = 'sdsfdfsdsdsdfv';
 		$user->save();
 		
-		return redirect()->route('users.index')->withFlashMessage('UspjeÅ¡no ste dodali novog korisnika');
+		return redirect()->route('users.index')->withFlashMessage('Uspješno ste dodali novog korisnika');
 		}
 
     /**
@@ -51,6 +51,7 @@ class UsersController extends Controller {
      */
     public function show($id) {
 		$user = User::find($id);
+		return view('users.show',compact('user'));
 		}
 
     /**
@@ -60,7 +61,8 @@ class UsersController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit($id) {
-        
+		$user = User::find($id);
+        return view ('users.edit',compact('user'));
 		}
 
     /**
@@ -71,7 +73,18 @@ class UsersController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id) {
-        
+		$user = User::find($id);
+		if (isset($request->username)) {
+			$user->name = $request['username'];
+			}
+		if (isset($request->email)) {
+			$user->email = $request['email'];
+			}
+		if (isset($request->password)) {	
+			$user->password = $request['password'];
+			}
+		$user->save();
+		return redirect()->route('users.index')->withFlashMessage('User je uspješno updatan!');
 		}
 
     /**
@@ -81,6 +94,9 @@ class UsersController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy($id) {
-        
+        $user = User::find($id);
+		$user -> delete();
+		
+		return redirect()->route('users.index')->withFlashMessage('User deleted!');
 		}
 	}

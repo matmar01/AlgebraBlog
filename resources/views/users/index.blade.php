@@ -23,7 +23,7 @@
 				</a>
 			</div>
 			<div class="panel-body">
-				@if ($users->count())
+			@if ($users->count())
 				<table class="table table-striped">
 					<thead>
 						<tr>
@@ -36,7 +36,7 @@
 					<tbody>
 						@foreach ($users as $user)
 						<tr>
-							<td>{{ $user->id }}</td>
+							<td><a href=" {{ route('users.show', $user->id ) }}">{{ $user->id }}</a></td>
 							<td>{{ $user->name }}</td>
 							<td>{{ $user->email }}</td>
 							<td>
