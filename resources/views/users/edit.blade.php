@@ -36,10 +36,6 @@
 						<label for="password">Password je {{ $user->password }}</label>
 						<input type="password" class="form-control" id="password" name="password" placeholder="Upišite novi password">
 					</div>
-					<div class="form-group">
-						<label for="confirm_password">Confirm password</label>
-						<input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Ponovite novi password">
-					</div>
 					<button type="submit" class="btn btn-primary">Updataj</button>
 					<a href="{{ route('users.index')}}" class="btn btn-danger" role="button">Odustani</a>
 				</form>

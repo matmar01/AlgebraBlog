@@ -78,7 +78,7 @@ class UsersController extends Controller {
 			$user->name = $request['username'];
 			}
 		if (isset($request->email)) {
-			$user->email = $request['email'];
+			$user->email = request('email');
 			}
 		if (isset($request->password)) {	
 			$user->password = $request['password'];
