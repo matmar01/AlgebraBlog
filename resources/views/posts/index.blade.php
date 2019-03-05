@@ -1,31 +1,25 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset=utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE-edge">
-	<meta name="viewport" content="width-device-width">
-	<title>Posts</title>
-	
-</head>
-<body>
+@extends('layouts.master')
 
-	<h1>Posts</h1>
-	<p>
+@section('content')
+
+	<div class="col-sm-8 blog-main">
+		@foreach ($posts as $key => $post)
 		
-		<ul>
-			@foreach ($posts as $key => $post)
-				<a href="posts/{{ $post->id }}">	
-					<li> {{$post->title}} </li>
-				</a>	
-				<p> {{$post->body}} </p>
-			@endforeach	
-		</ul>	
+		<div class="blog-post">
+			<h2 class="blog-post-title">{{ $post->title }}</h2>
+			<p class="blog-post-meta">{{ $post->created_at->toFormattedDateString() }}<a href="#"> Mark</a></p>
+
+			<section>
+				{{ $post->body }}
+			</section>
+			
+		</div><!-- /.blog-post -->
 		
-		@php
-			dd($posts);
-		@endphp
-		
-	</p>
+	@endforeach		
 	
-</body>
-</html>
+		<nav class="blog-pagination">
+			<a class="btn btn-outline-primary" href="#">Older</a>
+			<a class="btn btn-outline-secondary disabled" href="#">Newer</a>
+		</nav>	
+	</div>	
+@endsection
