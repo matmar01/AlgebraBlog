@@ -1,23 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset=utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE-edge">
-	<meta name="viewport" content="width-device-width">
-	<title>Posts</title>
-	
-</head>
-<body>
+@extends('layouts.master')
 
-	<h1>Post</h1>
-	<p>
-		
-		<ul>
-			<li> {{$post->title}} </li>
+@section('content')
+
+<div class="col-sm-8 blog-main">
+	<div class="blog-post">	
+		<h1 class="blog-post-title">{{ $post->title }}</h1>
+		<p class="blog-post-meta">{{ $post->created_at->toFormattedDateString() }}</p>
+		<section>
 			<p> {{$post->body}} </p>
-		</ul>	
-		
-	</p>
-	
-</body>
-</html>
+		</section>
+	</div>	
+</div>	
+
+@endsection
