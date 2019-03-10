@@ -10,7 +10,7 @@
 		@endif
 		
 		<div class="panel panel-default">
-			<div class="panel-heading">
+			<div class="panel-heading" style="margin-bottom:5%">
 				<a href="{{ route('users.create') }}" class="btn btn-primary" role="button">
 					Dodaj novog korisnika
 				</a>

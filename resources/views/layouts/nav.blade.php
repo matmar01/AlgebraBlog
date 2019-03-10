@@ -57,20 +57,20 @@
 		</nav>
 	@else
 		<nav class="nav blog-nav navbar-expand-lg">
-			@if (url()->current() == 'http://localhost:8000/home')
-				<a class='nav-link active' href='http://localhost:8000/home'>Home</a>
+			@if (url()->current() == route('home'))
+				<a class='nav-link active' href="{{ route('home') }}">Home</a>
 			@else 
-				<a class='nav-link' href='http://localhost:8000/home'>Home</a>
+				<a class='nav-link' href="{{ route('home') }}">Home</a>
 			@endif
-			@if (url()->current() == 'http://localhost:8000/posts')
-				<a class="nav-link active" href="http://localhost:8000/posts">Posts</a>
+			@if (url()->current() == route('posts.index'))
+				<a class="nav-link active" href="{{ route('posts.index') }}">Posts</a>
 			@else
-				<a class='nav-link' href='http://localhost:8000/posts'>Posts</a>
+				<a class='nav-link' href="{{ route('posts.index') }}">Posts</a>
 			@endif
-			@if (url()->current() == 'http://localhost:8000/users')
-				<a class="nav-link active" href="http://localhost:8000/users">Users</a>
+			@if (url()->current() == route('users.index'))
+				<a class="nav-link active" href="{{ route('users.index') }}">Users</a>
 			@else
-				<a class='nav-link' href='http://localhost:8000/users'>Users</a>
+				<a class='nav-link' href="{{ route('users.index') }}">Users</a>
 			@endif
 			<div class="collapse navbar-collapse" id="navbarNavDropdown">
 				<ul class="navbar-nav">

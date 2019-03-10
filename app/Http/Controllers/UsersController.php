@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\User;
 
 class UsersController extends Controller {
@@ -36,11 +37,10 @@ class UsersController extends Controller {
 		
 		$user->name = $request['username'];
 		$user->email = $request['email'];
-		$user->password = $request['password'];
-		//$user->remember_token = 'sdsfdfsdsdsdfv';
+		$user->password = Hash::make($request['password']);
 		$user->save();
 		
-		return redirect()->route('users.index')->withFlashMessage('Uspješno ste dodali novog korisnika');
+		return redirect()->route('users.index')->withFlashMessage('Uspje¹no ste dodali novog korisnika');
 		}
 
     /**
@@ -81,7 +81,7 @@ class UsersController extends Controller {
 			$user->email = request('email');
 			}
 		if (isset($request->password)) {	
-			$user->password = $request['password'];
+			$user->password = bcrypt($request['password']);
 			}
 		$user->save();
 		return redirect()->route('users.index')->withFlashMessage('User je uspješno updatan!');

@@ -28,7 +28,6 @@ Route::get('/', function () {
 	return view('about',compact('user'));
 });*/
 
-Route::get('/posts','PostsController@index');
 	
 	/*$posts = DB::table('posts')->get();
 	
@@ -36,8 +35,15 @@ Route::get('/posts','PostsController@index');
 	
 	return view('posts.index',compact('posts'));
 	*/
+/*
+Route::get('/posts','PostsController@index')->name('posts');
 
-Route::get('/posts/{id}','PostsController@show');
+Route::get('/posts/{post}','PostsController@show')->name('posts.show');
+	
+Route::get('/posts/create','PostsController@create')->name('posts.create');	
+
+Route::post('/posts','PostsController@store')->name('posts.store');
+*/
 	
 	/*$post = DB::table('posts')->find($id);
 	
@@ -52,9 +58,9 @@ Route::get('/users/create','UsersController@create')->name('users.create');
 
 Route::post('/users','UsersController@store');
 
-Route::get('/users/{user}','UsersController@edit');
+Route::get('/users/{user}','UsersController@show');
 
-Route::get('/users/{user}/edit','UsersController@show');
+Route::get('/users/{user}/edit','UsersController@edit');
 
 Route::put('/users/{user}','UsersController@update');
 
@@ -62,6 +68,7 @@ Route::delete('/users/{user}','UsersController@destroy');*/
 
 Route::resource('users','UsersController');
 
+Route::resource('posts','PostsController');
 
 Auth::routes();
 
