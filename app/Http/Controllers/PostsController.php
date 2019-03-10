@@ -55,4 +55,31 @@ class PostsController extends Controller {
 		return redirect()->route('posts.index');
 		}
 	
+	public function destroy($id) {
+        $post = Post::find($id);
+		$post -> delete();
+		
+		return redirect()->route('posts.index')->withFlashMessage('Post deleted!');
+		}
+	
+	public function edit($id) {
+		$post = Post::find($id);
+        return view ('posts.edit',compact('post'));
+		}
+	
+	public function update($id) {
+		$post = Post::find($id);
+		
+		request()->validate([
+			'title' => ['required','min:3','max:255'],
+			'body' => 'required|min:3'
+			]);
+			
+		$post->title = request('title');
+		$post->body = request('body');
+		
+		$post->save();
+		return redirect()->route('posts.index')->withFlashMessage('Post je promijejen!');
+		}
+	
 	}

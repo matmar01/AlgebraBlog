@@ -50,6 +50,8 @@
 	<div class="container">
 	@guest 
 		<nav class="nav blog-nav">
+			<a class='nav-link float-right' href="{{ route('posts.index') }}">Posts</a>
+			<a class='nav-link float-right' href="{{ route('users.index') }}">Users</a>
 			<a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
 			@if (Route::has('register')) 
 				<a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>

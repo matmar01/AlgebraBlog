@@ -26,7 +26,7 @@
 						<input type="email" class="form-control" id="email" name="email" placeholder="Upišite novi email">
 					</div>
 					<div class="form-group">
-						<label for="password">Password je {{ $user->password }}</label>
+						<label for="password">Password</label>
 						<input type="password" class="form-control" id="password" name="password" placeholder="Upišite novi password">
 					</div>
 					<button type="submit" class="btn btn-primary">Updataj</button>
