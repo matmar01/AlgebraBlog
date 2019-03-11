@@ -31,6 +31,9 @@
 					</div>
 					<button type="submit" class="btn btn-primary">Updataj</button>
 					<a href="{{ route('users.index')}}" class="btn btn-danger" role="button">Odustani</a>
+					<div class="form-group">
+						@include('layouts.errors')
+					</div>	
 				</form>
 			</div>
 		</div>

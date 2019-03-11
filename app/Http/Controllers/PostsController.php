@@ -37,7 +37,7 @@ class PostsController extends Controller {
 		//$post = new Post();
 		
 		request()->validate([
-			'title' => ['required','min:3','max:255'],
+			'title' => ['required','min:3'],
 			'body' => 'required|min:3'
 			]);
 		/*
@@ -71,7 +71,7 @@ class PostsController extends Controller {
 		$post = Post::find($id);
 		
 		request()->validate([
-			'title' => ['required','min:3','max:255'],
+			'title' => ['required','min:3'],
 			'body' => 'required|min:3'
 			]);
 			
@@ -81,5 +81,7 @@ class PostsController extends Controller {
 		$post->save();
 		return redirect()->route('posts.index')->withFlashMessage('Post je promijejen!');
 		}
+	
+	
 	
 	}

@@ -10,7 +10,7 @@ class UsersController extends Controller {
 	
 	public function __construct() {
 		
-		$this->middleware('auth')->except(['index','show']);
+		$this->middleware('auth');
 		
 		}
 
@@ -43,6 +43,7 @@ class UsersController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
+		//validate request()->validate
 		$user = new User();
 		
 		$user->name = $request['username'];
