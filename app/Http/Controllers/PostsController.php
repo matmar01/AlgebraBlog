@@ -64,8 +64,14 @@ class PostsController extends Controller {
 	
 	public function edit($id) {
 		$post = Post::find($id);
-        return view ('posts.edit',compact('post'));
-		}
+		
+		if($post->user_id == auth()->id()) {
+			return view('posts.edit',compact('post'));
+			}
+		else {
+			return view('posts.show',compact('post'));
+			}	
+		}	
 	
 	public function update($id) {
 		$post = Post::find($id);
