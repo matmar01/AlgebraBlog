@@ -37,8 +37,8 @@ class PostsController extends Controller {
 		//$post = new Post();
 		
 		request()->validate([
-			'title' => ['required','min:3'],
-			'body' => 'required|min:3'
+			'title' => ['required','min:3','max:255'],
+			'body' => 'required|min:3|max:65535'
 			]);
 		/*
 		$post->title = request('title');
@@ -52,7 +52,7 @@ class PostsController extends Controller {
 			'user_id' => auth()->id()
 			]);
 		
-		return redirect()->route('posts.index');
+		return redirect()->route('posts.index')->withFlashMessage('Post added successfully');
 		}
 	
 	public function destroy($id) {
@@ -71,8 +71,8 @@ class PostsController extends Controller {
 		$post = Post::find($id);
 		
 		request()->validate([
-			'title' => ['required','min:3'],
-			'body' => 'required|min:3'
+			'title' => ['required','min:3','max:255'],
+			'body' => 'required|min:3|max:65535'
 			]);
 			
 		$post->title = request('title');

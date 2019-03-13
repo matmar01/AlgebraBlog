@@ -43,7 +43,12 @@ class UsersController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-		//validate request()->validate
+		request()->validate([
+			'username'  => 'required|min:3',
+            'email'     => 'required|email|max:255|unique:users',
+            'password'  => 'required|confirmed|min:6'
+			]);
+		
 		$user = new User();
 		
 		$user->name = $request['username'];
@@ -86,16 +91,25 @@ class UsersController extends Controller {
     public function update(Request $request, $id) {
 		$user = User::find($id);
 		if (isset($request->username)) {
+			request()->validate([
+				'name'      => 'required|min:3'
+				]);
 			$user->name = $request['username'];
 			}
 		if (isset($request->email)) {
+			request()->validate([
+				'email'      => 'email|max:255'
+				]);
 			$user->email = request('email');
 			}
 		if (isset($request->password)) {	
+			request()->validate([
+				'password'      => 'nullable|min:6'
+				]);
 			$user->password = bcrypt($request['password']);
 			}
 		$user->save();
-		return redirect()->route('users.index')->withFlashMessage('User je uspješno updatan!');
+		return redirect()->route('users.index')->withFlashMessage('User je uspjesno updatan!');
 		}
 
     /**
