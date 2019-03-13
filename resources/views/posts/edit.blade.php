@@ -1,13 +1,6 @@
 @extends('layouts.master')
 
 @section('content')
-	@if ( $post->user_id !== auth()->id() ) 
-		<div class="col-sm-8 blog-main">
-			<div class="form-group">
-					<a href="{{ route('posts.show',$post->id)}}" class="btn btn-danger" role="button">Go Back</a>
-				</div>
-		</div>
-	@else
 	<div class="col-sm-8 blog-main">
 		@if (session()->has('flash_message'))
 		<div class="alert alert-success alert-dismissible">
@@ -43,6 +36,5 @@
 			</div>
 		</div>
 	</div>
-	@endif
 
 @endsection
