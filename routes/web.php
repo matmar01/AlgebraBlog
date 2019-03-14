@@ -66,13 +66,14 @@ Route::put('/users/{user}','UsersController@update');
 
 Route::delete('/users/{user}','UsersController@destroy');*/
 
-Route::resource('users','UsersController');
+Route::resource('users','UsersController')->middleware('verified');
 
 Route::resource('posts','PostsController');
 
-Auth::routes();
+Auth::routes(['verify' => 'true']);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 
 Route::post('/posts/{post}/comment','CommentController@store')->middleware('auth');
+

@@ -10,6 +10,7 @@ class PostsController extends Controller {
 	public function __construct() {
 		
 		$this->middleware('auth')->except(['index','show']);
+		$this->middleware('verified')->except(['index','show']);
 		
 		}
 	
@@ -18,7 +19,9 @@ class PostsController extends Controller {
 		$posts = Post::latest()->get();
 	
 		return view('posts.index',compact('posts'));
-	
+		
+		// SELECT year(created_at) as year, monthname(created_at) as month, count(*) as published_posts FROM posts GROUP BY year, month ORDER BY min(created_at) desc
+
 		}
 	public function show($id) {
 		
@@ -69,7 +72,7 @@ class PostsController extends Controller {
 			return view('posts.edit',compact('post'));
 			}
 		else {
-			return view('posts.show',compact('post'));
+			return redirect()->route('posts.show',compact('post'));
 			}	
 		}	
 	
