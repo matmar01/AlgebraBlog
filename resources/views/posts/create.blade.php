@@ -25,6 +25,16 @@
 						<label for="body">Body</label>
 						<textarea class="form-control" id="body" name="body" required placeholder="Upišite novi post" rows="6">{{  old('body') }}</textarea>
 					</div>
+					@isset ($categories) 
+						<div class="radio {{ $errors->has('category') ? 'has-error' : ''}}">
+							<label for="radio">Categories:</label><br/>
+							@foreach ($categories as $category)
+								<label><input type="radio" name="category" value="{{ $category }}">
+									{{ $category }}
+								</label>
+							@endforeach
+						</div>
+					@endisset
 					<div class="form-group {{ $errors->has('tag') ? 'has-error' : ''}}">
 						<label for="tag">Tag</label>
 						<input type="text" class="form-control" id="tag" name="tag" placeholder="Upišite neki tag" value="{{  old('tag') }}">

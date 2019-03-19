@@ -13,7 +13,7 @@
 		<h1 class="blog-post-title">{{ $post->title }}</h1>
 		<p class="blog-post-meta">{{ $post->created_at->toFormattedDateString() }} by <a href="#"> {{ $post->user->name }}</a></p>
 		@if(count($post->tags))
-		<section>
+		<section style = "margin-bottom:20px;">
 			<h6 style="display:inline;">Tags: </h6>
 			@foreach ($post->tags as $tag)
 				<a href="{{ route('tags',$tag) }}">
@@ -22,6 +22,16 @@
 			@endforeach
 		</section>
 		@endif
+		@isset($post->categories)
+		<section style = "margin-bottom:20px;">
+			<h6 style="display:inline;">Category: </h6>
+			@foreach ($post->categories as $category)
+				<a href="{{ route('tags',$tag) }}">
+					{{ $category->name }}
+				</a>
+			@endforeach
+		</section>
+		@endisset
 		<section>
 			{{ $post->body }}
 		</section>

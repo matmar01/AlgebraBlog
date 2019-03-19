@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;
 use App\Tag;
+use App\Category;
 use Carbon\Carbon;
 
 class PostsController extends Controller {
@@ -68,9 +69,16 @@ class PostsController extends Controller {
 			
 		$tag = request('tag');
 		$tag = Tag::where('name',$tag)->get();
-		$tag_id = $tag->id;
-		$post->tags()->attach($tag_id);
-		
+		foreach ($tag as $tg) {
+			$tag_id = $tg->id;
+			$post->tags()->attach($tag_id);
+			}
+		$category = request('category');
+		$category = Category::where('name',$category)->get();
+		foreach ($category as $cat) {
+			$cat_id = $cat->id;
+			$post->categories()->attach($cat_id);
+			}
 		return redirect()->route('posts.index')->withFlashMessage('Post added successfully');
 		}
 	

@@ -14,6 +14,16 @@
 				</li>
 			@endforeach
 		</ol>
+		<h4>Categories</h4>
+		<ol class="list-unstyled">
+			@foreach ($categories as $category)
+				<li>
+					<a href="{{ route('categories',$category) }}">
+						{{ $category }}
+					</a>
+				</li>
+			@endforeach
+		</ol>
 		<h4>Tags</h4>
 		<ol class="list-unstyled">
 			@foreach ($tags as $tag)

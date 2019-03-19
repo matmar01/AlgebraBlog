@@ -6,7 +6,8 @@ use App\Tag;
 use Illuminate\Http\Request;
 
 class TagController extends Controller {
-    public function index(Tag $tag) {
+    
+	public function index(Tag $tag) {
 		
 		$posts = $tag->posts;
 

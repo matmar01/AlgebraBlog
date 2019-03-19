@@ -79,3 +79,5 @@ Route::post('/posts/{post}/comment','CommentController@store')->middleware('auth
 
 Route::get('/posts/tags/{tag}','TagController@index')->name('tags');
 
+Route::get('/posts/categories/{category}','CategoryController@index')->name('categories');
+

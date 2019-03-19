@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App\Post;
 use App\Tag;
+use App\Category;
 
 class AppServiceProvider extends ServiceProvider {
     /**
@@ -27,8 +28,12 @@ class AppServiceProvider extends ServiceProvider {
 		view()->composer('layouts.sidebar',function($view) {
 			$archives = Post::archives();
 			$tags = Tag::pluck('name');
-			$view->with(compact('archives','tags'));
+			$categories = Category::pluck('name');
+			$view->with(compact('archives','tags','categories'));
 			});
-		
+		view()->composer('posts.create',function($view) {
+			$categories = Category::pluck('name');
+			$view->with(compact('categories'));
+			});
 		}
 	}
