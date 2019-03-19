@@ -3,9 +3,10 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Post;
+use App\Tag;
 
-class AppServiceProvider extends ServiceProvider
-{
+class AppServiceProvider extends ServiceProvider {
     /**
      * Register any application services.
      *
@@ -21,8 +22,13 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
-    {
-        //
-    }
-}
+    public function boot() {
+		
+		view()->composer('layouts.sidebar',function($view) {
+			$archives = Post::archives();
+			$tags = Tag::pluck('name');
+			$view->with(compact('archives','tags'));
+			});
+		
+		}
+	}

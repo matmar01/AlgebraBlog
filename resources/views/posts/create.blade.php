@@ -25,6 +25,10 @@
 						<label for="body">Body</label>
 						<textarea class="form-control" id="body" name="body" required placeholder="Upišite novi post" rows="6">{{  old('body') }}</textarea>
 					</div>
+					<div class="form-group {{ $errors->has('tag') ? 'has-error' : ''}}">
+						<label for="tag">Tag</label>
+						<input type="text" class="form-control" id="tag" name="tag" placeholder="Upišite neki tag" value="{{  old('tag') }}">
+					</div>
 					<div class="form-group">
 						<button type="submit" class="btn btn-primary">Publish</button>
 						<a href="{{ route('posts.index')}}" class="btn btn-danger" role="button">Back</a>

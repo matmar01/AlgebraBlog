@@ -77,3 +77,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::post('/posts/{post}/comment','CommentController@store')->middleware('auth');
 
+Route::get('/posts/tags/{tag}','TagController@index')->name('tags');
+

@@ -12,6 +12,16 @@
 	@endif
 		<h1 class="blog-post-title">{{ $post->title }}</h1>
 		<p class="blog-post-meta">{{ $post->created_at->toFormattedDateString() }} by <a href="#"> {{ $post->user->name }}</a></p>
+		@if(count($post->tags))
+		<section>
+			<h6 style="display:inline;">Tags: </h6>
+			@foreach ($post->tags as $tag)
+				<a href="{{ route('tags',$tag) }}">
+					{{ $tag->name }}
+				</a>
+			@endforeach
+		</section>
+		@endif
 		<section>
 			{{ $post->body }}
 		</section>
@@ -79,5 +89,7 @@
 </div>	
 <!-- Mailgun 
 https://signup.mailgun.com/new/signup 
+migracija, model ,kontroler za kategorije i ispis u create i show
+category_post pivoticu
 -->
 @endsection

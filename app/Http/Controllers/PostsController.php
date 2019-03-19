@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use App\Tag;
+use Carbon\Carbon;
 
 class PostsController extends Controller {
     
@@ -16,8 +18,17 @@ class PostsController extends Controller {
 	
 	public function index () {
 		
-		$posts = Post::latest()->get();
-	
+		$posts = Post::latest();
+		
+		if ($month = request('month')) { //if(isset($_GET['month'])) je isto
+			$posts->whereMonth('created_at',Carbon::parse($month)->month);
+			}
+		if ($year = request('year')) { 
+			$posts->whereYear('created_at',$year);
+			}
+			
+		$posts = $posts->get();
+		
 		return view('posts.index',compact('posts'));
 		
 		// SELECT year(created_at) as year, monthname(created_at) as month, count(*) as published_posts FROM posts GROUP BY year, month ORDER BY min(created_at) desc
@@ -49,11 +60,16 @@ class PostsController extends Controller {
 		$post->user_id = auth()->id();
 		$post->save();*/
 		
-		Post::create([
+		$post = Post::create([
 			'title' => request('title'),
 			'body' => request('body'),
 			'user_id' => auth()->id()
 			]);
+			
+		$tag = request('tag');
+		$tag = Tag::where('name',$tag)->get();
+		$tag_id = $tag->id;
+		$post->tags()->attach($tag_id);
 		
 		return redirect()->route('posts.index')->withFlashMessage('Post added successfully');
 		}
