@@ -74,6 +74,9 @@
 			@else
 				<a class='nav-link' href="{{ route('users.index') }}">Users</a>
 			@endif
+			@auth
+				<a class='nav-link float-right' href="{{ route('user.posts.show',auth()->id()) }}">My Posts</a>
+			@endauth	
 			<div class="collapse navbar-collapse" id="navbarNavDropdown">
 				<ul class="navbar-nav">
 					<li class="nav-item dropdown">

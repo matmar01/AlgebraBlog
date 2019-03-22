@@ -11,7 +11,7 @@
 		</div>
 	@endif
 		<h1 class="blog-post-title">{{ $post->title }}</h1>
-		<p class="blog-post-meta">{{ $post->created_at->toFormattedDateString() }} by <a href="#"> {{ $post->user->name }}</a></p>
+		<p class="blog-post-meta">{{ $post->created_at->toFormattedDateString() }} <a href="{{ route('user.posts.show',$post->user->id) }}"> {{ $post->user->name }}</a></p>
 		@if(count($post->tags))
 		<section style = "margin-bottom:20px;">
 			<h6 style="display:inline;">Tags: </h6>
@@ -26,7 +26,7 @@
 		<section style = "margin-bottom:20px;">
 			<h6 style="display:inline;">Category: </h6>
 			@foreach ($post->categories as $category)
-				<a href="{{ route('tags',$tag) }}">
+				<a href="{{ route('tags',$category) }}">
 					{{ $category->name }}
 				</a>
 			@endforeach
@@ -59,7 +59,7 @@
 	{{-- Add a comment --}}
 	
 	<div class="card">
-		<div class="card-block">
+		<div class="card-body">
 			<form action="/posts/{{ $post->id }}/comment" method="POST">
 				{{ csrf_field() }}
 				<div class="form-group">

@@ -45,7 +45,10 @@ class PostsController extends Controller {
 		}
 		
 	public function create() {
-        return view ('posts.create');
+		
+		$categories = Category::all();
+		$tags = Tag::all();
+        return view('posts.create')->with(compact('categories','tags'));
 		}
 	
 	public function store() {
@@ -67,7 +70,7 @@ class PostsController extends Controller {
 			'user_id' => auth()->id()
 			]);
 			
-		$tag = request('tag');
+		/*$tag = request('tag');
 		$tag = Tag::where('name',$tag)->get();
 		foreach ($tag as $tg) {
 			$tag_id = $tg->id;
@@ -78,7 +81,9 @@ class PostsController extends Controller {
 		foreach ($category as $cat) {
 			$cat_id = $cat->id;
 			$post->categories()->attach($cat_id);
-			}
+			}*/
+		$tags = request('tag');
+		$post->tags()->attach($tags);
 		return redirect()->route('posts.index')->withFlashMessage('Post added successfully');
 		}
 	
@@ -91,9 +96,11 @@ class PostsController extends Controller {
 	
 	public function edit($id) {
 		$post = Post::find($id);
+		$categories = Category::all();
+		$tags = Tag::all();
 		
 		if($post->user_id == auth()->id()) {
-			return view('posts.edit',compact('post'));
+			return view('posts.edit',compact('post','categories','tags'));
 			}
 		else {
 			return redirect()->route('posts.show',compact('post'));
@@ -107,14 +114,25 @@ class PostsController extends Controller {
 			'title' => ['required','min:3','max:255'],
 			'body' => 'required|min:3|max:65535'
 			]);
-			
+		
+		
 		$post->title = request('title');
 		$post->body = request('body');
 		
 		$post->save();
+		
+		$post->tags()->sync(request('tags'));
+		$post->categories()->sync(request('category'));
+		
 		return redirect()->route('posts.index')->withFlashMessage('Post je promijejen!');
 		}
 	
-	
+	public function showPostsForUser($id) {
+		
+		$posts = Post::where('user_id',$id)->orderBy('created_at','desc')->get();
+		
+		return view('posts.index',compact('posts'));
+		
+		}
 	
 	}

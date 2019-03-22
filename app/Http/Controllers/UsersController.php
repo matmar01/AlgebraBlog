@@ -33,7 +33,11 @@ class UsersController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function create() {
+		
+		request()->user()->authorizeRoles(['admin','operator']);
+		
         return view ('users.create');
+		
 		}
 
     /**

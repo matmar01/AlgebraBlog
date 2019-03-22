@@ -13,5 +13,16 @@ class TagController extends Controller {
 
 		return view('posts.index',compact('posts'));
 		}
+	
+	public function store() {
+		
+		$tag = request()->validate([
+			'name' => 'required|min:3|max:255'
+			]);
+		Tag::create($tag);
+		
+		return redirect()->back()->withFlashMessage('Tag added successfully');
+		
+		}
 
 }

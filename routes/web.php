@@ -66,7 +66,7 @@ Route::put('/users/{user}','UsersController@update');
 
 Route::delete('/users/{user}','UsersController@destroy');*/
 
-Route::resource('users','UsersController')->middleware('verified');
+Route::resource('users','UsersController')->middleware('roles:admin');
 
 Route::resource('posts','PostsController');
 
@@ -79,5 +79,8 @@ Route::post('/posts/{post}/comment','CommentController@store')->middleware('auth
 
 Route::get('/posts/tags/{tag}','TagController@index')->name('tags');
 
+Route::post('/tags','TagController@store')->name('tags.store');
+
 Route::get('/posts/categories/{category}','CategoryController@index')->name('categories');
 
+Route::get('/user/{user}/posts','PostsController@showPostsForUser')->name('user.posts.show');

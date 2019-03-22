@@ -27,13 +27,10 @@ class AppServiceProvider extends ServiceProvider {
 		
 		view()->composer('layouts.sidebar',function($view) {
 			$archives = Post::archives();
-			$tags = Tag::pluck('name');
-			$categories = Category::pluck('name');
+			//$tags = Tag::pluck('name');
+			$tags = Tag::has('posts')->pluck('name');
+			$categories = Category::has('posts')->pluck('name');
 			$view->with(compact('archives','tags','categories'));
-			});
-		view()->composer('posts.create',function($view) {
-			$categories = Category::pluck('name');
-			$view->with(compact('categories'));
 			});
 		}
 	}
